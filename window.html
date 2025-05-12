@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="window.css">
+    <title>Hey</title>
+</head>
+<body>
+    <div class="parent">
+        <div class="div1">
+            <h1>Hey, Ayat!</h1>
+            <p>I love you so much, you are the world to me. I admire you the most. I can't believe I lasted
+                18 years without you. Meeting you has been the best thing that has ever happened to me, it's like something
+                I didn't know that I needed. Already imagining my future with you, making sure every one of them will be our reality soon.
+                Ikaw ang pipiliin ko araw-araw. Relationships has ups and downs, and you're the only one I want to face them with.
+            </p>
+            <label for="message">Message:</label>
+            <!-- Removed 'readonly' for developer to see typed message -->
+            <textarea id="message" placeholder="Message"></textarea>
+        </div>
+        
+        <div class="div2">
+            <!-- Camera -->
+            <video id="camera" width="100%" autoplay></video>
+        </div>
+    
+        <div class="div5">
+            <!-- Photo Container -->
+            <div class="photo-container">
+                <img src="https://i.pinimg.com/736x/90/dd/67/90dd67805105a7834065e9930d6ed25e.jpg" alt="Sample Photo" style="width: 100%; height: auto;" />
+            </div>
+        </div>
+    
+        <div class="div6">
+            <!-- Centered Audio Player -->
+            <audio controls>
+              <source src="Zack Tabudlo - Give Me Your Forever (Lyric Video).mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+        </div>          
+    </div>
+
+    <script>
+    // Check if there's a saved message in localStorage and set it as the textarea's value
+    const messageBox = document.getElementById('message');
+    if (localStorage.getItem('savedMessage')) {
+        messageBox.value = localStorage.getItem('savedMessage');
+    }
+
+    // Listen for changes to the message box and log the input for the developer
+    messageBox.addEventListener('input', function() {
+        console.log("Current typed message: ", messageBox.value); // Logs typed message to the console
+        localStorage.setItem('savedMessage', messageBox.value);  // Save to localStorage
+    });
+
+    // Camera functionality
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(stream => {
+        document.getElementById('camera').srcObject = stream;
+      })
+      .catch(error => {
+        console.error("Camera access denied or unavailable:", error);
+      });
+    </script>
+</body>
+</html>
